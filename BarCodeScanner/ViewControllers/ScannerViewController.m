@@ -7,6 +7,7 @@
 //
 
 #import "ScannerViewController.h"
+#import "MBProgressHUD.h"
 
 @interface ScannerViewController ()
 
@@ -21,6 +22,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addGuesterRecognizer];
+    
+ /*   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.animationType = MBProgressHUDAnimationFade;
+    hud.labelText = @"Some message...";
+    hud.margin = 10.0;
+    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+    hud.yOffset = height / 2 - 40;
+  */
 }
 
 

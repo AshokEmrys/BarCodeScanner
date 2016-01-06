@@ -19,7 +19,23 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G43-Yf-do6" userLabel="CameraView">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpJ-9H-iMx">
+                                        <rect key="frame" x="27" y="22" width="29" height="29"/>
+                                        <state key="normal" image="FlashOFF"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8D-gJ-tCn">
+                                        <rect key="frame" x="544" y="22" width="29" height="29"/>
+                                        <state key="normal" image="SwitchCamera"/>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="N8D-gJ-tCn" firstAttribute="top" secondItem="G43-Yf-do6" secondAttribute="top" constant="22" id="PED-d8-e8a"/>
+                                    <constraint firstAttribute="trailing" secondItem="N8D-gJ-tCn" secondAttribute="trailing" constant="27" id="s2g-gu-IVl"/>
+                                    <constraint firstItem="LpJ-9H-iMx" firstAttribute="leading" secondItem="G43-Yf-do6" secondAttribute="leading" constant="27" id="tF9-h6-thz"/>
+                                    <constraint firstItem="LpJ-9H-iMx" firstAttribute="top" secondItem="G43-Yf-do6" secondAttribute="top" constant="22" id="xws-Jx-bMb"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Scan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wmg-4C-8Td">
                                 <rect key="frame" x="239" y="319" width="123" height="27"/>
@@ -66,4 +82,8 @@
             <point key="canvasLocation" x="61" y="484"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="FlashOFF" width="29" height="29"/>
+        <image name="SwitchCamera" width="29" height="29"/>
+    </resources>
 </document>
