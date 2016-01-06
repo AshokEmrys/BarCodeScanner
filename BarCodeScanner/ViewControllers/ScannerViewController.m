@@ -154,6 +154,7 @@
     [self.tapToScanLabel setHidden:NO];
     [self.flashButton setEnabled:NO];
     [self.switchCameraButton setEnabled:NO];
+    [self.scanner stopScanning];
 }
 
 - (void)addScanAnimation
