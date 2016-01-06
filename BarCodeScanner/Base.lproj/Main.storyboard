@@ -21,9 +21,27 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dsc-ag-tr5" userLabel="TapArea">
+                                <rect key="frame" x="150" y="150" width="300" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="CVp-uQ-cdR"/>
+                                    <constraint firstAttribute="width" constant="300" id="u9B-2q-lqt"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8D-gJ-tCn">
                                 <rect key="frame" x="544" y="86" width="29" height="29"/>
                                 <state key="normal" image="SwitchCamera"/>
+                                <connections>
+                                    <action selector="flipCameraButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L4S-q0-0ng"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpJ-9H-iMx">
+                                <rect key="frame" x="27" y="86" width="29" height="29"/>
+                                <state key="normal" image="FlashOFF"/>
+                                <connections>
+                                    <action selector="flashButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HVm-QW-Ool"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Scan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wmg-4C-8Td">
                                 <rect key="frame" x="239" y="319" width="123" height="27"/>
@@ -31,13 +49,6 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpJ-9H-iMx">
-                                <rect key="frame" x="27" y="86" width="29" height="29"/>
-                                <state key="normal" image="FlashAUTO"/>
-                                <connections>
-                                    <action selector="flashButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HVm-QW-Ool"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -45,11 +56,13 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="G43-Yf-do6" secondAttribute="bottom" id="7hC-w4-7AU"/>
                             <constraint firstItem="N8D-gJ-tCn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="22" id="9Nw-2P-2HF"/>
                             <constraint firstItem="G43-Yf-do6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="BUw-GH-e2d"/>
+                            <constraint firstItem="Dsc-ag-tr5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Hm5-VG-wXD"/>
+                            <constraint firstItem="Dsc-ag-tr5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="PaL-Pk-oZF"/>
                             <constraint firstAttribute="trailing" secondItem="N8D-gJ-tCn" secondAttribute="trailing" constant="27" id="Tb1-DF-pPE"/>
+                            <constraint firstItem="LpJ-9H-iMx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="27" id="Wxw-Tk-xRB"/>
                             <constraint firstItem="Wmg-4C-8Td" firstAttribute="centerX" secondItem="G43-Yf-do6" secondAttribute="centerX" id="iL1-C8-rpg"/>
                             <constraint firstItem="G43-Yf-do6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kVj-Ms-HhL"/>
-                            <constraint firstItem="LpJ-9H-iMx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="22" id="nU9-ob-Ddu"/>
-                            <constraint firstItem="LpJ-9H-iMx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="27" id="qcB-mU-ZWb"/>
+                            <constraint firstItem="LpJ-9H-iMx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="22" id="sR8-yl-xu9"/>
                             <constraint firstAttribute="trailing" secondItem="G43-Yf-do6" secondAttribute="trailing" id="zt7-UC-P26"/>
                         </constraints>
                     </view>
@@ -59,6 +72,7 @@
                         <outlet property="scannerPreview" destination="G43-Yf-do6" id="KWI-ml-6ot"/>
                         <outlet property="switchCameraButton" destination="N8D-gJ-tCn" id="gRQ-FU-VdR"/>
                         <outlet property="tapToScanLabel" destination="Wmg-4C-8Td" id="2g6-kV-ZzP"/>
+                        <outlet property="tapView" destination="Dsc-ag-tr5" id="wNU-B3-prK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -85,7 +99,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="FlashAUTO" width="29" height="29"/>
+        <image name="FlashOFF" width="29" height="29"/>
         <image name="SwitchCamera" width="29" height="29"/>
     </resources>
 </document>

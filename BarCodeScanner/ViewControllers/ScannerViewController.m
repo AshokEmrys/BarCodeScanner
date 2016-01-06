@@ -13,6 +13,7 @@
 @interface ScannerViewController ()
 
 @property(nonatomic) MTBBarcodeScanner *scanner;
+@property (weak, nonatomic) IBOutlet UIView *tapView;
 @property (weak, nonatomic) IBOutlet UIView *scannerPreview;
 @property (weak, nonatomic) IBOutlet UIButton *flashButton;
 @property (weak, nonatomic) IBOutlet UIButton *switchCameraButton;
@@ -26,17 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addGuesterRecognizer];
     self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerPreview];
     
- /*   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.animationType = MBProgressHUDAnimationFade;
-    hud.labelText = @"Some message...";
-    hud.margin = 10.0;
-    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
-    hud.yOffset = height / 2 - 40;
-  */
+    [self addGuesterRecognizer];
+    [self setInitialDesign];
 }
 
 
@@ -52,6 +46,17 @@
     [super viewWillDisappear:animated];
 }
 
+- (void)setInitialDesign
+{
+    [self.flashButton setImage:[UIImage imageNamed:@"FlashOFF"] forState:UIControlStateDisabled];
+    [self manipulateFlashButtonIcon];
+    
+    if (![self.scanner hasTorch]) {
+        [self.flashButton setHidden:YES];
+    }
+    
+}
+
 #pragma mark - UI Events
 
 - (IBAction)flashButtonTapped:(id)sender {
@@ -59,14 +64,23 @@
     if (self.scanner.torchMode == MTBTorchModeOff) {
         
         self.scanner.torchMode = MTBTorchModeAuto;
+        [self manipulateFlashButtonIcon];
     }
     else if (self.scanner.torchMode == MTBTorchModeAuto) {
         self.scanner.torchMode = MTBTorchModeOn;
+        [self manipulateFlashButtonIcon];
     }
     else {
         self.scanner.torchMode = MTBTorchModeOn;
+        [self manipulateFlashButtonIcon];
     }
     
+}
+
+- (IBAction)flipCameraButtonTapped:(id)sender {
+    
+    [self.scanner flipCamera];
+    [self manipulateFlashButtonIcon];
 }
 
 #pragma mark - PRIVATE
@@ -74,7 +88,7 @@
 - (void)addGuesterRecognizer
 {
     UITapGestureRecognizer *singleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    [self.view addGestureRecognizer:singleTapRecognizer];
+    [self.tapView addGestureRecognizer:singleTapRecognizer];
     // When the app is launched the scan should initially be disabled
     self.isScanning = NO;
 }
@@ -102,9 +116,22 @@
     }
 }
 
-- (void)manipulateFlashButtonIconForMode:(MTBTorchMode) mode
+- (void)manipulateFlashButtonIcon
 {
-    
+    switch (self.scanner.torchMode) {
+        case MTBTorchModeOff:
+            [self.flashButton setImage:[UIImage imageNamed:@"FlashOFF"] forState:UIControlStateNormal];
+            break;
+        case MTBTorchModeOn:
+            [self.flashButton setImage:[UIImage imageNamed:@"FlashON"] forState:UIControlStateNormal];
+            break;
+        case MTBTorchModeAuto:
+            [self.flashButton setImage:[UIImage imageNamed:@"FlashAUTO"] forState:UIControlStateNormal];
+            break;
+        default:
+            [self.flashButton setImage:[UIImage imageNamed:@"FlashOFF"] forState:UIControlStateNormal];
+            break;
+    }
 }
 
 - (void)startScanning
@@ -114,7 +141,7 @@
     
     //Start Scanning
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
-
+        [self processScannedCodes:codes];
     }];
     
     [self.flashButton setEnabled:YES];
@@ -176,7 +203,21 @@
 
 - (void)processScannedCodes:(NSArray *)codes
 {
-    
+    for (AVMetadataMachineReadableCodeObject *code in codes) {
+        NSString *codeString = code.stringValue;
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+         hud.mode = MBProgressHUDModeText;
+         hud.animationType = MBProgressHUDAnimationFade;
+         hud.labelText = codeString;
+         hud.margin = 10.0;
+         CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+         hud.yOffset = height / 2 - 40;
+        [hud hide:YES afterDelay:1];
+        
+        // implement the functionality here
+        break;
+    }
 }
 
 - (void)displayCameraErrorAlert
