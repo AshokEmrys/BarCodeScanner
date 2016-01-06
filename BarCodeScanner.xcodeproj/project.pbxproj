@@ -15,6 +15,7 @@
 		1E64FE251C3D3D6C00E1FEAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E64FE231C3D3D6C00E1FEAE /* LaunchScreen.storyboard */; };
 		1E64FE301C3D3D6C00E1FEAE /* BarCodeScannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E64FE2F1C3D3D6C00E1FEAE /* BarCodeScannerTests.m */; };
 		1E64FE3B1C3D3D6C00E1FEAE /* BarCodeScannerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E64FE3A1C3D3D6C00E1FEAE /* BarCodeScannerUITests.m */; };
+		5E620C119CD857DC326DC953 /* libPods-BarCodeScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C58FAAB7C01D0C4FD9C95BA3 /* libPods-BarCodeScanner.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,9 @@
 		1E64FE361C3D3D6C00E1FEAE /* BarCodeScannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BarCodeScannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E64FE3A1C3D3D6C00E1FEAE /* BarCodeScannerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BarCodeScannerUITests.m; sourceTree = "<group>"; };
 		1E64FE3C1C3D3D6C00E1FEAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		573D3111B2A4E912E3A99583 /* Pods-BarCodeScanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarCodeScanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BarCodeScanner/Pods-BarCodeScanner.debug.xcconfig"; sourceTree = "<group>"; };
+		C58FAAB7C01D0C4FD9C95BA3 /* libPods-BarCodeScanner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BarCodeScanner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E653DC1F55E8B67A48FD90E9 /* Pods-BarCodeScanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarCodeScanner.release.xcconfig"; path = "Pods/Target Support Files/Pods-BarCodeScanner/Pods-BarCodeScanner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E620C119CD857DC326DC953 /* libPods-BarCodeScanner.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +89,8 @@
 				1E64FE2E1C3D3D6C00E1FEAE /* BarCodeScannerTests */,
 				1E64FE391C3D3D6C00E1FEAE /* BarCodeScannerUITests */,
 				1E64FE101C3D3D6B00E1FEAE /* Products */,
+				8F65E1F53913479CE516E3E6 /* Pods */,
+				327A1B6BF5E1A1D1503E2228 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +145,23 @@
 			path = BarCodeScannerUITests;
 			sourceTree = "<group>";
 		};
+		327A1B6BF5E1A1D1503E2228 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C58FAAB7C01D0C4FD9C95BA3 /* libPods-BarCodeScanner.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8F65E1F53913479CE516E3E6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				573D3111B2A4E912E3A99583 /* Pods-BarCodeScanner.debug.xcconfig */,
+				E653DC1F55E8B67A48FD90E9 /* Pods-BarCodeScanner.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,9 +169,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E64FE3F1C3D3D6C00E1FEAE /* Build configuration list for PBXNativeTarget "BarCodeScanner" */;
 			buildPhases = (
+				B403053B7E3C9BCB9797FD06 /* Check Pods Manifest.lock */,
 				1E64FE0B1C3D3D6B00E1FEAE /* Sources */,
 				1E64FE0C1C3D3D6B00E1FEAE /* Frameworks */,
 				1E64FE0D1C3D3D6B00E1FEAE /* Resources */,
+				F83A73941332A59A762F20F1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -262,6 +288,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B403053B7E3C9BCB9797FD06 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F83A73941332A59A762F20F1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BarCodeScanner/Pods-BarCodeScanner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1E64FE0B1C3D3D6B00E1FEAE /* Sources */ = {
@@ -409,6 +468,7 @@
 		};
 		1E64FE401C3D3D6C00E1FEAE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 573D3111B2A4E912E3A99583 /* Pods-BarCodeScanner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BarCodeScanner/Info.plist;
@@ -422,6 +482,7 @@
 		};
 		1E64FE411C3D3D6C00E1FEAE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E653DC1F55E8B67A48FD90E9 /* Pods-BarCodeScanner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BarCodeScanner/Info.plist;
@@ -500,6 +561,7 @@
 				1E64FE411C3D3D6C00E1FEAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1E64FE421C3D3D6C00E1FEAE /* Build configuration list for PBXNativeTarget "BarCodeScannerTests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +570,7 @@
 				1E64FE441C3D3D6C00E1FEAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1E64FE451C3D3D6C00E1FEAE /* Build configuration list for PBXNativeTarget "BarCodeScannerUITests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +579,7 @@
 				1E64FE471C3D3D6C00E1FEAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

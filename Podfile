@@ -3,6 +3,8 @@
 
 target 'BarCodeScanner' do
 
+pod “MTBBarcodeScanner”
+
 end
 
 target 'BarCodeScannerTests' do
