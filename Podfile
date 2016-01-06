@@ -4,6 +4,7 @@
 target 'BarCodeScanner' do
 
 pod “MTBBarcodeScanner”
+pod 'MBProgressHUD', '~> 0.9.2'
 
 end
 
