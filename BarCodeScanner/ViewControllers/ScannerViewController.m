@@ -7,11 +7,16 @@
 //
 
 #import "ScannerViewController.h"
+#import "MTBBarcodeScanner.h"
 #import "MBProgressHUD.h"
 
 @interface ScannerViewController ()
 
-@property(nonatomic) BOOL isScanEnabled;
+@property(nonatomic) MTBBarcodeScanner *scanner;
+@property (weak, nonatomic) IBOutlet UIView *scannerPreview;
+@property (weak, nonatomic) IBOutlet UIButton *flashButton;
+@property (weak, nonatomic) IBOutlet UIButton *switchCameraButton;
+@property(nonatomic) BOOL isScanning;
 @property(nonatomic) CAShapeLayer *scanLine;
 @property (weak, nonatomic) IBOutlet UILabel *tapToScanLabel;
 
@@ -22,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addGuesterRecognizer];
+    self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerPreview];
     
  /*   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hud.mode = MBProgressHUDModeText;
@@ -40,6 +46,28 @@
 }
 
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.scanner stopScanning];
+    [super viewWillDisappear:animated];
+}
+
+#pragma mark - UI Events
+
+- (IBAction)flashButtonTapped:(id)sender {
+    
+    if (self.scanner.torchMode == MTBTorchModeOff) {
+        
+        self.scanner.torchMode = MTBTorchModeAuto;
+    }
+    else if (self.scanner.torchMode == MTBTorchModeAuto) {
+        self.scanner.torchMode = MTBTorchModeOn;
+    }
+    else {
+        self.scanner.torchMode = MTBTorchModeOn;
+    }
+    
+}
 
 #pragma mark - PRIVATE
 
@@ -48,26 +76,57 @@
     UITapGestureRecognizer *singleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [self.view addGestureRecognizer:singleTapRecognizer];
     // When the app is launched the scan should initially be disabled
-    self.isScanEnabled = NO;
+    self.isScanning = NO;
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)tapRecognizer
 {
-    [self switchScanState];
+    [self toggleScanState];
 }
 
-- (void)switchScanState
+- (void)toggleScanState
 {
-    if (self.isScanEnabled) {
-        [self removeScanAnimation];
-        [self.tapToScanLabel setHidden:NO];
+    if (self.isScanning) {
+        [self stopScanning];
     }
     else {
-        [self addScanAnimation];
-        [self.tapToScanLabel setHidden:YES];
+        [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success) {
+            if (success) {
+                [self startScanning];
+            }
+            else {
+                [self displayCameraErrorAlert];
+            }
+        }];
+        
     }
+}
+
+- (void)manipulateFlashButtonIconForMode:(MTBTorchMode) mode
+{
     
-    self.isScanEnabled = !self.isScanEnabled;
+}
+
+- (void)startScanning
+{
+    [self addScanAnimation];
+    [self.tapToScanLabel setHidden:YES];
+    
+    //Start Scanning
+    [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
+
+    }];
+    
+    [self.flashButton setEnabled:YES];
+    [self.switchCameraButton setEnabled:YES];
+}
+
+- (void)stopScanning
+{
+    [self removeScanAnimation];
+    [self.tapToScanLabel setHidden:NO];
+    [self.flashButton setEnabled:NO];
+    [self.switchCameraButton setEnabled:NO];
 }
 
 - (void)addScanAnimation
@@ -86,6 +145,7 @@
     animation.repeatCount = HUGE_VALF;
     animation.duration = 1.8;
     animation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut];
+    
     [self.scanLine  addAnimation:animation forKey:@"moveY"];
 }
 
@@ -112,6 +172,32 @@
     self.scanLine.strokeColor = [UIColor grayColor].CGColor;
     self.scanLine.lineWidth = 3.0f;
     [self.view.layer addSublayer:self.scanLine];
+}
+
+- (void)processScannedCodes:(NSArray *)codes
+{
+    
+}
+
+- (void)displayCameraErrorAlert
+{
+    NSString *message = nil;
+    
+    if ([MTBBarcodeScanner scanningIsProhibited]) {
+        message = @"This app does not have sufficient permission to access the camera.";
+    }
+    else if (![MTBBarcodeScanner cameraIsPresent]) {
+        message = @"This device does not have a camera.";
+    }
+    else {
+        message = @"An unknown error occurred.";
+    }
+    
+    [[[UIAlertView alloc] initWithTitle:@"Scanning Unavailable"
+                                message:message
+                               delegate:nil
+                      cancelButtonTitle:@"Ok"
+                      otherButtonTitles:nil] show];
 }
 
 
