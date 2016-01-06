@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="R7U-b3-nLG">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Barcode Scanner-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController title="Barcode Scanner" id="BYZ-38-t0r" customClass="ScannerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +16,54 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G43-Yf-do6" userLabel="CameraView">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Scan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wmg-4C-8Td">
+                                <rect key="frame" x="239" y="319" width="123" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Wmg-4C-8Td" firstAttribute="centerY" secondItem="G43-Yf-do6" secondAttribute="centerY" id="2Y2-fF-JKK"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="G43-Yf-do6" secondAttribute="bottom" id="7hC-w4-7AU"/>
+                            <constraint firstItem="G43-Yf-do6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="BUw-GH-e2d"/>
+                            <constraint firstItem="Wmg-4C-8Td" firstAttribute="centerX" secondItem="G43-Yf-do6" secondAttribute="centerX" id="iL1-C8-rpg"/>
+                            <constraint firstItem="G43-Yf-do6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kVj-Ms-HhL"/>
+                            <constraint firstAttribute="trailing" secondItem="G43-Yf-do6" secondAttribute="trailing" id="zt7-UC-P26"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Barcode Scanner" id="iip-vu-YcI"/>
+                    <connections>
+                        <outlet property="tapToScanLabel" destination="Wmg-4C-8Td" id="2g6-kV-ZzP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="998" y="484"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="88s-rz-Yyo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R7U-b3-nLG" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VZa-O4-KPj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="YUh-fR-2nX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z7l-Cu-8dc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="61" y="484"/>
         </scene>
     </scenes>
 </document>
